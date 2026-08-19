@@ -1,12 +1,12 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { Sidebar } from './components/sidebar/sidebar';
+import { Breadcrumb } from './components/breadcrumb/breadcrumb';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, Sidebar, Breadcrumb],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
-export class App {
-  protected readonly title = signal('projeto-mirante');
-}
+export class App {}

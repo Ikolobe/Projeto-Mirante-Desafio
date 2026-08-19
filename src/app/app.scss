@@ -1,0 +1,12 @@
+:host {
+  display: flex;
+  height: 100%;
+}
+
+.main-content {
+  margin-left: 72px;
+  flex: 1;
+  padding: 24px;
+  background-color: #fafafa;
+  min-height: 100vh;
+}

@@ -1,0 +1,12 @@
+.home-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - 48px);
+}
+
+.home-title {
+  font-size: 48px;
+  font-weight: 500;
+  color: #00695c;
+}
