@@ -1,0 +1,15 @@
+<div class="action-bar">
+  @for (action of actions(); track action.key) {
+    <button
+      class="action-btn"
+      [class.action-btn-filled]="action.style === 'filled'"
+      [class.action-btn-outlined]="action.style !== 'filled'"
+      [disabled]="action.disabled || false"
+      (click)="onAction(action.key)">
+      @if (action.icon) {
+        <mat-icon class="action-icon">{{ action.icon }}</mat-icon>
+      }
+      <span>{{ action.label }}</span>
+    </button>
+  }
+</div>

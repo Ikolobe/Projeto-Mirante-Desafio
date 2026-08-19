@@ -4,3 +4,17 @@
   [filters]="filters"
   (search)="onSearch($event)"
 ></app-dynamic-filter>
+
+<app-action-bar
+  [actions]="actions"
+  (actionClick)="onAction($event)"
+></app-action-bar>
+
+@if (tableData.length > 0) {
+  <app-data-table
+    [config]="tableConfig"
+    [data]="tableData"
+    (selectionChange)="onSelectionChange($event)"
+    (pageChange)="onPageChange($event)"
+  ></app-data-table>
+}
