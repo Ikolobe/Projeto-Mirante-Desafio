@@ -114,8 +114,16 @@
         }
       </div>
 
+      @if (rangeErrors().length > 0) {
+        <div class="filter-errors">
+          @for (error of rangeErrors(); track error.key) {
+            <span class="error-message">* {{ error.message }}</span>
+          }
+        </div>
+      }
+
       <div class="d-flex justify-content-end mt-3">
-        <button mat-raised-button color="primary" type="submit" class="btn-search">
+        <button mat-raised-button color="primary" type="submit" class="btn-search" [disabled]="hasErrors()">
           Pesquisar
         </button>
       </div>

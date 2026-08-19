@@ -60,6 +60,14 @@ export interface RangeFilterConfig extends FilterConfig {
 }
 
 /**
+ * Validador customizado que pode ser passado pelo componente pai.
+ */
+export interface CustomFilterValidator {
+  /** Função que recebe os valores do form e retorna mensagem de erro ou null */
+  validate: (values: FilterValues) => string | null;
+}
+
+/**
  * Valores emitidos pelo componente de filtros.
  */
 export type FilterValues = Record<string, unknown>;

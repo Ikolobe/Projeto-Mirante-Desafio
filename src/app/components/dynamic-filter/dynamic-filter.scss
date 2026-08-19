@@ -123,3 +123,28 @@
   padding: 0 24px;
   border-radius: 4px;
 }
+
+.range-error {
+  font-size: 11px;
+  color: #d32f2f;
+  margin-top: 4px;
+  display: block;
+}
+
+.filter-errors {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  margin-top: 8px;
+}
+
+.error-message {
+  font-size: 11px;
+  color: #d32f2f;
+}
+
+.btn-search:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
