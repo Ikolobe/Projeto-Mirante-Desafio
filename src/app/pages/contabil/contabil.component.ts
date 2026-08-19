@@ -10,6 +10,7 @@ import { ModalIncluir } from './modal-incluir/modal-incluir.component';
 import { ModalJustificativa } from './modal-justificativa/modal-justificativa.component';
 import { Loading } from '../../components/loading/loading.component';
 import { ContabilService, LoteRecord } from './contabil.service';
+import { UtilsProvider } from '../../utils/utils.provider';
 
 @Component({
   selector: 'app-contabil',
@@ -20,6 +21,7 @@ import { ContabilService, LoteRecord } from './contabil.service';
 export class ContabilComponent {
   private service = inject(ContabilService);
   private destroyRef = inject(DestroyRef);
+  private utils = inject(UtilsProvider);
 
     constructor() {
     // Subscreve ao estado do service
@@ -189,14 +191,18 @@ export class ContabilComponent {
         valor: data['valor'] as number,
         quantLancamentos: data['quantLancamentos'] as number,
         usuarioRegistro: data['usuarioRegistro'] as string,
-      }).pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
+      }).pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
+        this.utils.showSuccess('Sucesso', 'Lote alterado com sucesso!');
+      });
     } else {
       this.service.incluir({
         dataEntrada: data['dataEntrada'] as Date,
         valor: data['valor'] as number,
         quantLancamentos: data['quantLancamentos'] as number,
         usuarioRegistro: data['usuarioRegistro'] as string,
-      }).pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
+      }).pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
+        this.utils.showSuccess('Sucesso', 'Lote incluído com sucesso!');
+      });
     }
   }
 
@@ -211,7 +217,9 @@ export class ContabilComponent {
       const ids = this.selectedRows.map((r) => r['idLote'] as number);
       this.service.atualizarSituacao(ids, situacao, text)
         .pipe(takeUntilDestroyed(this.destroyRef))
-        .subscribe();
+        .subscribe(() => {
+          this.utils.showSuccess('Sucesso', `Lote(s) ${situacao.toLowerCase()}(s) com sucesso!`);
+        });
     }
   }
 
@@ -244,6 +252,7 @@ export class ContabilComponent {
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(() => {
         this.selectedRows = [];
+        this.utils.showSuccess('Sucesso', 'Lote(s) excluído(s) com sucesso!');
       });
   }
 }

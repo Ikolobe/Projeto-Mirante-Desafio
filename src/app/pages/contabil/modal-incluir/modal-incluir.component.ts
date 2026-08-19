@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { MatIconModule } from '@angular/material/icon';
 import { BsDatepickerModule, BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { CurrencyMaskDirective } from '../../../components/dynamic-filter/currency-mask.directive';
+import { UtilsProvider } from '../../../utils/utils.provider';
 
 export type ModalMode = 'incluir' | 'alterar' | 'visualizar';
 
@@ -31,6 +32,7 @@ export class ModalIncluir implements OnInit, AfterViewInit {
 
   private fb = inject(FormBuilder);
   private localeService = inject(BsLocaleService);
+  private utils = inject(UtilsProvider);
 
   get isEditMode(): boolean {
     return this.mode() === 'alterar';
@@ -55,7 +57,7 @@ export class ModalIncluir implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.localeService.use('pt-br');
     this.form = this.fb.group({
-      dataEntrada: ['', Validators.required],
+      dataEntrada: ['', [Validators.required, this.utils.dateValidator()]],
       valor: ['', Validators.required],
       quantLancamentos: ['', Validators.required],
       usuarioRegistro: ['', Validators.required],

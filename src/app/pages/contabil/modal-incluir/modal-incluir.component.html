@@ -23,6 +23,9 @@
               </span>
             }
           </div>
+          @if (form.get('dataEntrada')?.hasError('invalidDate') && form.get('dataEntrada')?.touched) {
+            <span class="field-error">* Data inválida</span>
+          }
         </div>
 
         <div class="col-12 col-md-6 mb-3">
