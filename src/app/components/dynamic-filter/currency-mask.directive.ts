@@ -13,7 +13,9 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 })
 export class CurrencyMaskDirective implements ControlValueAccessor {
   private el = inject(ElementRef);
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   private onChange: (value: number | null) => void = () => {};
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   private onTouched: () => void = () => {};
 
   @HostListener('input')

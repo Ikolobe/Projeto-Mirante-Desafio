@@ -25,7 +25,7 @@ export class ModalIncluir implements OnInit, AfterViewInit {
   save = output<Record<string, unknown>>();
 
   /** Evento emitido ao cancelar/fechar */
-  close = output<void>();
+  closeModal = output<void>();
 
   form!: FormGroup;
   dpConfig = { dateInputFormat: 'DD/MM/YYYY', containerClass: 'theme-green' };
@@ -85,7 +85,7 @@ export class ModalIncluir implements OnInit, AfterViewInit {
   }
 
   onCancel(): void {
-    this.close.emit();
+    this.closeModal.emit();
   }
 
   ngAfterViewInit(): void {

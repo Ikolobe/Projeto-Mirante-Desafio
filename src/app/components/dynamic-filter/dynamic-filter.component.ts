@@ -43,7 +43,7 @@ export class DynamicFilter implements OnInit {
   customValidators = input<CustomFilterValidator[]>([]);
 
   /** Evento emitido ao clicar em Pesquisar */
-  search = output<FilterValues>();
+  searchSubmit = output<FilterValues>();
 
   /** Tempo de debounce para validação em ms */
   debounceMs = input<number>(300);
@@ -83,7 +83,7 @@ export class DynamicFilter implements OnInit {
   onSearch(): void {
     this.validateRanges();
     if (!this.hasErrors()) {
-      this.search.emit(this.form.getRawValue());
+      this.searchSubmit.emit(this.form.getRawValue());
     }
   }
 

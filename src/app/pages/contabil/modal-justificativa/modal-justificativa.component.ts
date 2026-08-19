@@ -1,4 +1,4 @@
-import { Component, input, output, signal, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, input, output, signal, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 
@@ -8,8 +8,9 @@ import { MatIconModule } from '@angular/material/icon';
   templateUrl: './modal-justificativa.component.html',
   styleUrl: './modal-justificativa.component.scss',
 })
-export class ModalJustificativa {
+export class ModalJustificativa implements OnInit, AfterViewInit {
   @ViewChild('modalContainer') modalContainer!: ElementRef<HTMLElement>;
+
   /** Título da modal */
   title = input<string>('Justificativa');
 
@@ -23,7 +24,7 @@ export class ModalJustificativa {
   confirm = output<string>();
 
   /** Evento emitido ao fechar */
-  close = output<void>();
+  closeModal = output<void>();
 
   justificativa = signal('');
 
@@ -40,7 +41,7 @@ export class ModalJustificativa {
   }
 
   onCancel(): void {
-    this.close.emit();
+    this.closeModal.emit();
   }
 
   ngAfterViewInit(): void {

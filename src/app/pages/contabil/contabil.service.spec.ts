@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { TestBed } from '@angular/core/testing';
 import { skip, take } from 'rxjs';
-import { ContabilService, LoteRecord } from './contabil.service';
+import { ContabilService } from './contabil.service';
 
 describe('ContabilService', () => {
   let service: ContabilService;

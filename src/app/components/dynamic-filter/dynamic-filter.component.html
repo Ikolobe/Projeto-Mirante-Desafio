@@ -16,29 +16,29 @@
         @for (filter of filters(); track filter.key) {
           @if (filter.type === 'text') {
             <div class="col-12 mb-3" [class.col-md-4]="(filter.colSpan || 4) === 4" [class.col-md-6]="(filter.colSpan || 4) === 6" [class.col-md-3]="(filter.colSpan || 4) === 3">
-              <label class="field-label">{{ filter.label }}</label>
-              <input type="text" class="form-control form-control-sm" [formControlName]="filter.key" [placeholder]="filter.placeholder || ''" />
+              <label class="field-label" [attr.for]="filter.key">{{ filter.label }}</label>
+              <input type="text" [id]="filter.key" class="form-control form-control-sm" [formControlName]="filter.key" [placeholder]="filter.placeholder || ''" />
             </div>
           }
 
           @if (filter.type === 'number') {
             <div class="col-12 mb-3" [class.col-md-4]="(filter.colSpan || 4) === 4" [class.col-md-6]="(filter.colSpan || 4) === 6" [class.col-md-3]="(filter.colSpan || 4) === 3">
-              <label class="field-label">{{ filter.label }}</label>
-              <input type="number" class="form-control form-control-sm" [formControlName]="filter.key" [placeholder]="filter.placeholder || ''" />
+              <label class="field-label" [attr.for]="filter.key">{{ filter.label }}</label>
+              <input type="number" [id]="filter.key" class="form-control form-control-sm" [formControlName]="filter.key" [placeholder]="filter.placeholder || ''" />
             </div>
           }
 
           @if (filter.type === 'textarea') {
             <div class="col-12 mb-3" [class.col-md-6]="(filter.colSpan || 6) === 6" [class.col-md-4]="(filter.colSpan || 6) === 4">
-              <label class="field-label">{{ filter.label }}</label>
-              <textarea class="form-control form-control-sm" [formControlName]="filter.key" [placeholder]="filter.placeholder || ''" rows="3"></textarea>
+              <label class="field-label" [attr.for]="filter.key">{{ filter.label }}</label>
+              <textarea [id]="filter.key" class="form-control form-control-sm" [formControlName]="filter.key" [placeholder]="filter.placeholder || ''" rows="3"></textarea>
             </div>
           }
 
           @if (filter.type === 'select') {
             <div class="col-12 mb-3" [class.col-md-4]="(filter.colSpan || 4) === 4" [class.col-md-6]="(filter.colSpan || 4) === 6" [class.col-md-3]="(filter.colSpan || 4) === 3">
-              <label class="field-label">{{ filter.label }}</label>
-              <select class="form-select form-select-sm" [formControlName]="filter.key">
+              <label class="field-label" [attr.for]="filter.key">{{ filter.label }}</label>
+              <select [id]="filter.key" class="form-select form-select-sm" [formControlName]="filter.key">
                 <option value="">{{ filter.placeholder || 'Selecione...' }}</option>
                 @for (opt of filter.options || []; track opt.value) {
                   <option [value]="opt.value">{{ opt.label }}</option>
@@ -49,9 +49,9 @@
 
           @if (filter.type === 'date') {
             <div class="col-12 mb-3" [class.col-md-4]="(filter.colSpan || 4) === 4" [class.col-md-6]="(filter.colSpan || 4) === 6" [class.col-md-3]="(filter.colSpan || 4) === 3">
-              <label class="field-label">{{ filter.label }}</label>
+              <label class="field-label" [attr.for]="filter.key">{{ filter.label }}</label>
               <div class="input-group input-group-sm input-group-borderless">
-                <input class="form-control" [formControlName]="filter.key"
+                <input class="form-control" [id]="filter.key" [formControlName]="filter.key"
                   bsDatepicker [bsConfig]="getDateConfig(filter)"
                   [placeholder]="filter.placeholder || 'dd/mm/aaaa'" />
                 <span class="input-group-text cursor-pointer">
@@ -63,8 +63,8 @@
 
           @if (filter.type === 'monetary') {
             <div class="col-12 mb-3" [class.col-md-3]="(filter.colSpan || 3) === 3" [class.col-md-4]="(filter.colSpan || 3) === 4" [class.col-md-6]="(filter.colSpan || 3) === 6">
-              <label class="field-label">{{ filter.label }}</label>
-              <input type="text" class="form-control form-control-sm" [formControlName]="filter.key" appCurrencyMask [placeholder]="filter.placeholder || 'R$ 0,00'" />
+              <label class="field-label" [attr.for]="filter.key">{{ filter.label }}</label>
+              <input type="text" [id]="filter.key" class="form-control form-control-sm" [formControlName]="filter.key" appCurrencyMask [placeholder]="filter.placeholder || 'R$ 0,00'" />
             </div>
           }
 
@@ -72,10 +72,10 @@
             <div class="col-12 mb-3" [class.col-md-6]="(filter.colSpan || 6) === 6" [class.col-md-8]="(filter.colSpan || 6) === 8" [class.col-md-4]="(filter.colSpan || 6) === 4">
               <div class="range-fields-inline">
                 <div class="range-item">
-                  <label class="field-label"><span class="range-main-label">{{ filter.label }}</span> <span class="range-de-ate range-de-space">De</span></label>
+                  <label class="field-label" [attr.for]="filter.key + '_from'"><span class="range-main-label">{{ filter.label }}</span> <span class="range-de-ate range-de-space">De</span></label>
                   @if (filter.rangeType === 'date') {
                     <div class="input-group input-group-sm input-group-borderless">
-                      <input class="form-control" [formControlName]="filter.key + '_from'"
+                      <input class="form-control" [formControlName]="filter.key + '_from'" [id]="filter.key + '_from'"
                         bsDatepicker [bsConfig]="getDateConfig(filter)"
                         [placeholder]="filter.placeholderFrom || 'dd/mm/aaaa'" />
                       <span class="input-group-text cursor-pointer">
@@ -83,18 +83,18 @@
                       </span>
                     </div>
                   } @else if (filter.rangeType === 'monetary') {
-                    <input type="text" class="form-control form-control-sm" [formControlName]="filter.key + '_from'" appCurrencyMask [placeholder]="filter.placeholderFrom || 'R$ 0,00'" />
+                    <input type="text" class="form-control form-control-sm" [formControlName]="filter.key + '_from'" [id]="filter.key + '_from'" appCurrencyMask [placeholder]="filter.placeholderFrom || 'R$ 0,00'" />
                   } @else if (filter.rangeType === 'number') {
-                    <input type="number" class="form-control form-control-sm" [formControlName]="filter.key + '_from'" [placeholder]="filter.placeholderFrom || ''" />
+                    <input type="number" class="form-control form-control-sm" [formControlName]="filter.key + '_from'" [id]="filter.key + '_from'" [placeholder]="filter.placeholderFrom || ''" />
                   } @else {
-                    <input type="text" class="form-control form-control-sm" [formControlName]="filter.key + '_from'" [placeholder]="filter.placeholderFrom || ''" />
+                    <input type="text" class="form-control form-control-sm" [formControlName]="filter.key + '_from'" [id]="filter.key + '_from'" [placeholder]="filter.placeholderFrom || ''" />
                   }
                 </div>
                 <div class="range-item">
-                  <label class="field-label"><span class="range-de-ate">Até</span></label>
+                  <label class="field-label" [attr.for]="filter.key + '_to'"><span class="range-de-ate">Até</span></label>
                   @if (filter.rangeType === 'date') {
                     <div class="input-group input-group-sm input-group-borderless">
-                      <input class="form-control" [formControlName]="filter.key + '_to'"
+                      <input class="form-control" [formControlName]="filter.key + '_to'" [id]="filter.key + '_to'"
                         bsDatepicker [bsConfig]="getDateConfig(filter)"
                         [placeholder]="filter.placeholderTo || 'dd/mm/aaaa'" />
                       <span class="input-group-text cursor-pointer">
@@ -102,11 +102,11 @@
                       </span>
                     </div>
                   } @else if (filter.rangeType === 'monetary') {
-                    <input type="text" class="form-control form-control-sm" [formControlName]="filter.key + '_to'" appCurrencyMask [placeholder]="filter.placeholderTo || 'R$ 0,00'" />
+                    <input type="text" class="form-control form-control-sm" [formControlName]="filter.key + '_to'" [id]="filter.key + '_to'" appCurrencyMask [placeholder]="filter.placeholderTo || 'R$ 0,00'" />
                   } @else if (filter.rangeType === 'number') {
-                    <input type="number" class="form-control form-control-sm" [formControlName]="filter.key + '_to'" [placeholder]="filter.placeholderTo || ''" />
+                    <input type="number" class="form-control form-control-sm" [formControlName]="filter.key + '_to'" [id]="filter.key + '_to'" [placeholder]="filter.placeholderTo || ''" />
                   } @else {
-                    <input type="text" class="form-control form-control-sm" [formControlName]="filter.key + '_to'" [placeholder]="filter.placeholderTo || ''" />
+                    <input type="text" class="form-control form-control-sm" [formControlName]="filter.key + '_to'" [id]="filter.key + '_to'" [placeholder]="filter.placeholderTo || ''" />
                   }
                 </div>
               </div>

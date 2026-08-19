@@ -60,21 +60,21 @@
     <nav class="pagination-container" aria-label="Paginação da tabela">
       <ul class="pagination pagination-sm">
         <li class="page-item" [class.disabled]="currentPage() === 1">
-          <a class="page-link" (click)="goToPage(1)" role="button" aria-label="Primeira página" [attr.aria-disabled]="currentPage() === 1">«</a>
+          <a class="page-link" tabindex="0" (click)="goToPage(1)" role="button" aria-label="Primeira página" [attr.aria-disabled]="currentPage() === 1">«</a>
         </li>
         <li class="page-item" [class.disabled]="currentPage() === 1">
-          <a class="page-link" (click)="goToPage(currentPage() - 1)" role="button" aria-label="Página anterior" [attr.aria-disabled]="currentPage() === 1">‹</a>
+          <a class="page-link" tabindex="0" (click)="goToPage(currentPage() - 1)" role="button" aria-label="Página anterior" [attr.aria-disabled]="currentPage() === 1">‹</a>
         </li>
         @for (page of pages(); track page) {
           <li class="page-item" [class.active]="page === currentPage()">
-            <a class="page-link" (click)="goToPage(page)" role="button" [attr.aria-label]="'Página ' + page" [attr.aria-current]="page === currentPage() ? 'page' : null">{{ page }}</a>
+            <a class="page-link" tabindex="0" (click)="goToPage(page)" role="button" [attr.aria-label]="'Página ' + page" [attr.aria-current]="page === currentPage() ? 'page' : null">{{ page }}</a>
           </li>
         }
         <li class="page-item" [class.disabled]="currentPage() === totalPages()">
-          <a class="page-link" (click)="goToPage(currentPage() + 1)" role="button" aria-label="Próxima página" [attr.aria-disabled]="currentPage() === totalPages()">›</a>
+          <a class="page-link" tabindex="0" (click)="goToPage(currentPage() + 1)" role="button" aria-label="Próxima página" [attr.aria-disabled]="currentPage() === totalPages()">›</a>
         </li>
         <li class="page-item" [class.disabled]="currentPage() === totalPages()">
-          <a class="page-link" (click)="goToPage(totalPages())" role="button" aria-label="Última página" [attr.aria-disabled]="currentPage() === totalPages()">»</a>
+          <a class="page-link" tabindex="0" (click)="goToPage(totalPages())" role="button" aria-label="Última página" [attr.aria-disabled]="currentPage() === totalPages()">»</a>
         </li>
       </ul>
     </nav>

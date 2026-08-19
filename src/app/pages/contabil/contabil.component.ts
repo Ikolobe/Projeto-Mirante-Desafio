@@ -9,7 +9,7 @@ import { TableConfig, PageChangeEvent } from '../../components/data-table/data-t
 import { ModalIncluir } from './modal-incluir/modal-incluir.component';
 import { ModalJustificativa } from './modal-justificativa/modal-justificativa.component';
 import { Loading } from '../../components/loading/loading.component';
-import { ContabilService, LoteRecord } from './contabil.service';
+import { ContabilService } from './contabil.service';
 import { UtilsProvider } from '../../utils/utils.provider';
 
 @Component({

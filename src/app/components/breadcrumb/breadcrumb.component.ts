@@ -28,7 +28,7 @@ export class Breadcrumb {
 
   breadcrumbs = computed(() => this.navigationEnd());
 
-  private buildBreadcrumbs(route: ActivatedRoute, url: string = '', breadcrumbs: BreadcrumbItem[] = []): BreadcrumbItem[] {
+  private buildBreadcrumbs(route: ActivatedRoute, url = '', breadcrumbs: BreadcrumbItem[] = []): BreadcrumbItem[] {
     const children = route.children;
 
     if (children.length === 0) {

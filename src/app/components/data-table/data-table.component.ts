@@ -166,6 +166,7 @@ export class DataTable {
     return row[column.key];
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   $any(value: unknown): any {
     return value;
   }

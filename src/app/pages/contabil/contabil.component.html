@@ -2,7 +2,7 @@
   title="Filtros"
   subtitle="PESQUISAR LOTE OUTROS CRÉDITOS/DÉBITOS"
   [filters]="filters"
-  (search)="onSearch($event)"
+  (searchSubmit)="onSearch($event)"
 ></app-dynamic-filter>
 
 <app-action-bar
@@ -35,7 +35,7 @@
     [mode]="modalMode()"
     [editData]="modalEditData()"
     (save)="onModalSave($event)"
-    (close)="onModalClose()"
+    (closeModal)="onModalClose()"
   ></app-modal-incluir>
 }
 
@@ -45,6 +45,6 @@
     [readonly]="justificativaReadonly()"
     [text]="justificativaText()"
     (confirm)="onJustificativaConfirm($event)"
-    (close)="onJustificativaClose()"
+    (closeModal)="onJustificativaClose()"
   ></app-modal-justificativa>
 }
