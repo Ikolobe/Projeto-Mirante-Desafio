@@ -37,3 +37,65 @@ body {
   height: 100%;
 }
 /* You can add global styles to this file, and also import other style files */
+
+/* Customização do bsDatepicker - tema do sistema */
+.bs-datepicker-container {
+  padding: 0;
+}
+
+.bs-datepicker {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.bs-datepicker-head {
+  background-color: #00695c !important;
+}
+
+.bs-datepicker-head button {
+  color: #ffffff !important;
+}
+
+.bs-datepicker-head button:hover {
+  background-color: #00897b !important;
+}
+
+.bs-datepicker-body table td span.selected,
+.bs-datepicker-body table td.selected span,
+.bs-datepicker-body table td span[class*="select-"]:after,
+.bs-datepicker-body table td[class*="select-"] span:after {
+  background-color: #00695c !important;
+}
+
+.bs-datepicker-body table td.week span {
+  color: #00695c !important;
+}
+
+.bs-datepicker-body table td span.is-highlighted:not(.disabled):not(.selected) {
+  background-color: #e0f2f1 !important;
+  color: #00695c !important;
+}
+
+.bs-datepicker-body table td span:not(.disabled):not(.selected):hover {
+  background-color: #e0f2f1 !important;
+  color: #00695c !important;
+}
+
+.bs-datepicker-body table td span.disabled {
+  color: #bdbdbd !important;
+}
+
+.bs-datepicker-body table td span {
+  color: #37474f;
+  font-weight: 400;
+  border-radius: 4px;
+}
+
+.theme-green .bs-datepicker-head {
+  background-color: #00695c !important;
+}
+
+.theme-green .bs-datepicker-body table td span.selected {
+  background-color: #00695c !important;
+}
