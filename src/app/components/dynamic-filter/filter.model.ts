@@ -1,7 +1,7 @@
 /**
  * Tipos de filtro suportados pelo componente dinâmico.
  */
-export type FilterType = 'text' | 'textarea' | 'date' | 'monetary' | 'number' | 'range';
+export type FilterType = 'text' | 'textarea' | 'date' | 'monetary' | 'number' | 'select' | 'range';
 
 /**
  * Modo de exibição do datepicker (bsDatepicker minMode).

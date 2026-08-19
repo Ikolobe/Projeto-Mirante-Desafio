@@ -8,8 +8,11 @@
           </th>
         }
         @for (col of config().columns; track col.key) {
-          <th [class]="col.headerClass || ''" [style.text-align]="col.align || 'left'">
-            {{ col.label }}
+          <th [class]="col.headerClass || ''" [style.text-align]="col.align || 'left'" (click)="toggleSort(col)" class="sortable-th">
+            <span class="th-content">
+              {{ col.label }}
+              <mat-icon class="sort-icon" [class.active-sort]="sortColumn() === col.key">{{ getSortIcon(col) }}</mat-icon>
+            </span>
           </th>
         }
       </tr>

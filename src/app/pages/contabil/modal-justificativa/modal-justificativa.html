@@ -1,0 +1,30 @@
+<div class="modal-overlay" (click)="onCancel()">
+  <div class="modal-container" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2 class="modal-title">{{ title() }}</h2>
+      <button class="modal-close" (click)="onCancel()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
+    <div class="modal-body">
+      <label class="field-label">Justificativa</label>
+      @if (readonly()) {
+        <textarea class="form-control" rows="5" readonly [value]="justificativa()"></textarea>
+      } @else {
+        <textarea class="form-control" rows="5" placeholder="Digite a justificativa..." [ngModel]="justificativa()" (ngModelChange)="justificativa.set($event)"></textarea>
+      }
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-secondary btn-sm" (click)="onCancel()">
+        {{ readonly() ? 'Fechar' : 'Cancelar' }}
+      </button>
+      @if (!readonly()) {
+        <button type="button" class="btn btn-primary btn-sm btn-submit" (click)="onConfirm()" [disabled]="!justificativa().trim()">
+          Confirmar
+        </button>
+      }
+    </div>
+  </div>
+</div>

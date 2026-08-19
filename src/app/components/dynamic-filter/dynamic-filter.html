@@ -34,6 +34,18 @@
             </div>
           }
 
+          @if (filter.type === 'select') {
+            <div class="col-12 mb-3" [class.col-md-4]="(filter.colSpan || 4) === 4" [class.col-md-6]="(filter.colSpan || 4) === 6" [class.col-md-3]="(filter.colSpan || 4) === 3">
+              <label class="field-label">{{ filter.label }}</label>
+              <select class="form-select form-select-sm" [formControlName]="filter.key">
+                <option value="">{{ filter.placeholder || 'Selecione...' }}</option>
+                @for (opt of filter.options || []; track opt.value) {
+                  <option [value]="opt.value">{{ opt.label }}</option>
+                }
+              </select>
+            </div>
+          }
+
           @if (filter.type === 'date') {
             <div class="col-12 mb-3" [class.col-md-4]="(filter.colSpan || 4) === 4" [class.col-md-6]="(filter.colSpan || 4) === 6" [class.col-md-3]="(filter.colSpan || 4) === 3">
               <label class="field-label">{{ filter.label }}</label>

@@ -20,6 +20,8 @@
         white-space: nowrap;
         letter-spacing: 0.3px;
         background-color: #00695c !important;
+        cursor: pointer;
+        user-select: none;
       }
     }
   }
@@ -53,6 +55,28 @@
         color: #37474f;
       }
     }
+  }
+}
+
+.sortable-th {
+  cursor: pointer;
+}
+
+.th-content {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.sort-icon {
+  font-size: 14px;
+  width: 14px;
+  height: 14px;
+  line-height: 14px;
+  opacity: 0.5;
+
+  &.active-sort {
+    opacity: 1;
   }
 }
 

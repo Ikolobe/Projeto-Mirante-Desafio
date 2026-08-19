@@ -99,3 +99,8 @@ body {
 .theme-green .bs-datepicker-body table td span.selected {
   background-color: #00695c !important;
 }
+
+/* Fix z-index do datepicker para ficar acima de modais */
+bs-datepicker-container {
+  z-index: 2050 !important;
+}

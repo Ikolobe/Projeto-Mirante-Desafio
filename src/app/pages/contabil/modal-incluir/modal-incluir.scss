@@ -1,0 +1,135 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.modal-container {
+  background: #ffffff;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.modal-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #00695c;
+  margin: 0;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #607d8b;
+  padding: 4px;
+  border-radius: 4px;
+
+  &:hover {
+    background-color: #f5f5f5;
+  }
+}
+
+.modal-body {
+  padding: 20px;
+}
+
+.field-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #37474f;
+  margin-bottom: 4px;
+  display: block;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding-top: 16px;
+  border-top: 1px solid #e0e0e0;
+  margin-top: 8px;
+}
+
+.btn-submit {
+  background-color: #00695c;
+  border-color: #00695c;
+
+  &:hover {
+    background-color: #00897b;
+    border-color: #00897b;
+  }
+}
+
+.input-group-borderless {
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+
+  .input-group-text {
+    background: transparent;
+    border: none;
+    padding-left: 8px;
+    padding-right: 8px;
+    display: flex;
+    align-items: center;
+  }
+
+  .form-control {
+    border: none;
+
+    &:focus {
+      box-shadow: none;
+    }
+  }
+}
+
+.datepicker-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  line-height: 18px;
+  color: #00695c;
+}
+
+.form-control:focus,
+.form-select:focus {
+  box-shadow: none;
+  border-color: #ced4da;
+}
+
+.field-readonly {
+  background-color: #f5f5f5 !important;
+  color: #607d8b !important;
+  cursor: not-allowed;
+}
+
+.modal-readonly {
+  .form-control,
+  .input-group-borderless {
+    background-color: #f5f5f5;
+  }
+
+  .form-control {
+    color: #607d8b;
+    cursor: not-allowed;
+  }
+}

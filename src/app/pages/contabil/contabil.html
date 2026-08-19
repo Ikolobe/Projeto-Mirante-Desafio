@@ -6,15 +6,38 @@
 ></app-dynamic-filter>
 
 <app-action-bar
-  [actions]="actions"
+  [actions]="actions()"
   (actionClick)="onAction($event)"
 ></app-action-bar>
 
-@if (tableData.length > 0) {
+@if (isLoading()) {
+  <app-loading></app-loading>
+}
+
+@if (!isLoading() && tableData().length > 0) {
   <app-data-table
     [config]="tableConfig"
-    [data]="tableData"
+    [data]="tableData()"
     (selectionChange)="onSelectionChange($event)"
     (pageChange)="onPageChange($event)"
   ></app-data-table>
+}
+
+@if (showModal()) {
+  <app-modal-incluir
+    [mode]="modalMode()"
+    [editData]="modalEditData()"
+    (save)="onModalSave($event)"
+    (close)="onModalClose()"
+  ></app-modal-incluir>
+}
+
+@if (showJustificativaModal()) {
+  <app-modal-justificativa
+    [title]="justificativaTitle()"
+    [readonly]="justificativaReadonly()"
+    [text]="justificativaText()"
+    (confirm)="onJustificativaConfirm($event)"
+    (close)="onJustificativaClose()"
+  ></app-modal-justificativa>
 }
