@@ -10,17 +10,24 @@
   (actionClick)="onAction($event)"
 ></app-action-bar>
 
-@if (isLoading()) {
+@if (isLoading() && tableData().length === 0) {
   <app-loading></app-loading>
 }
 
-@if (!isLoading() && tableData().length > 0) {
-  <app-data-table
-    [config]="tableConfig"
-    [data]="tableData()"
-    (selectionChange)="onSelectionChange($event)"
-    (pageChange)="onPageChange($event)"
-  ></app-data-table>
+@if (tableData().length > 0) {
+  <div class="table-wrapper" [class.loading-overlay-active]="isLoading()">
+    @if (isLoading()) {
+      <div class="table-loading-overlay">
+        <app-loading></app-loading>
+      </div>
+    }
+    <app-data-table
+      [config]="tableConfig"
+      [data]="tableData()"
+      (selectionChange)="onSelectionChange($event)"
+      (pageChange)="onPageChange($event)"
+    ></app-data-table>
+  </div>
 }
 
 @if (showModal()) {

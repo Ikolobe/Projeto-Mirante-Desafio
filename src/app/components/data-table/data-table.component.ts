@@ -6,8 +6,8 @@ import { TableConfig, ColumnConfig, PageChangeEvent } from './data-table.model';
 @Component({
   selector: 'app-data-table',
   imports: [DatePipe, CurrencyPipe, DecimalPipe, MatIconModule],
-  templateUrl: './data-table.html',
-  styleUrl: './data-table.scss',
+  templateUrl: './data-table.component.html',
+  styleUrl: './data-table.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DataTable {

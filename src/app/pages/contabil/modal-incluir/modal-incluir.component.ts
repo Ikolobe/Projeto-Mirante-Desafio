@@ -1,4 +1,4 @@
-import { Component, input, output, inject, OnInit } from '@angular/core';
+import { Component, input, output, inject, OnInit, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { BsDatepickerModule, BsLocaleService } from 'ngx-bootstrap/datepicker';
@@ -9,10 +9,11 @@ export type ModalMode = 'incluir' | 'alterar' | 'visualizar';
 @Component({
   selector: 'app-modal-incluir',
   imports: [ReactiveFormsModule, MatIconModule, BsDatepickerModule, CurrencyMaskDirective],
-  templateUrl: './modal-incluir.html',
-  styleUrl: './modal-incluir.scss',
+  templateUrl: './modal-incluir.component.html',
+  styleUrl: './modal-incluir.component.scss',
 })
-export class ModalIncluir implements OnInit {
+export class ModalIncluir implements OnInit, AfterViewInit {
+  @ViewChild('modalContainer') modalContainer!: ElementRef<HTMLElement>;
   /** Modo da modal: incluir, alterar ou visualizar */
   mode = input<ModalMode>('incluir');
 
@@ -83,5 +84,10 @@ export class ModalIncluir implements OnInit {
 
   onCancel(): void {
     this.close.emit();
+  }
+
+  ngAfterViewInit(): void {
+    // Focus no container da modal para trap focus funcionar
+    setTimeout(() => this.modalContainer?.nativeElement?.focus(), 0);
   }
 }

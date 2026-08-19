@@ -1,14 +1,15 @@
-import { Component, input, output, signal } from '@angular/core';
+import { Component, input, output, signal, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-modal-justificativa',
   imports: [FormsModule, MatIconModule],
-  templateUrl: './modal-justificativa.html',
-  styleUrl: './modal-justificativa.scss',
+  templateUrl: './modal-justificativa.component.html',
+  styleUrl: './modal-justificativa.component.scss',
 })
 export class ModalJustificativa {
+  @ViewChild('modalContainer') modalContainer!: ElementRef<HTMLElement>;
   /** Título da modal */
   title = input<string>('Justificativa');
 
@@ -40,5 +41,9 @@ export class ModalJustificativa {
 
   onCancel(): void {
     this.close.emit();
+  }
+
+  ngAfterViewInit(): void {
+    setTimeout(() => this.modalContainer?.nativeElement?.focus(), 0);
   }
 }

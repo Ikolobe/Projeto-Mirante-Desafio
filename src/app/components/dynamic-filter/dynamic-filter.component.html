@@ -1,16 +1,17 @@
-<div class="filter-panel" [class.collapsed]="!isExpanded">
-  <div class="filter-header" (click)="toggleExpanded()">
+<div class="filter-panel" [class.collapsed]="!isExpanded" role="search" aria-label="Painel de filtros" title="">
+  <div class="filter-header" (click)="toggleExpanded()" (keydown.enter)="toggleExpanded()" (keydown.space)="toggleExpanded()"
+    tabindex="0" role="button" [attr.aria-expanded]="isExpanded" aria-controls="filter-body" title="">
     <div class="filter-header-text">
       <span class="filter-title">{{ title() }}</span>
       @if (subtitle()) {
         <span class="filter-subtitle">{{ subtitle() }}</span>
       }
     </div>
-    <mat-icon class="filter-toggle-icon">{{ isExpanded ? 'expand_less' : 'expand_more' }}</mat-icon>
+    <mat-icon class="filter-toggle-icon" aria-hidden="true">{{ isExpanded ? 'expand_less' : 'expand_more' }}</mat-icon>
   </div>
 
   @if (isExpanded) {
-    <form [formGroup]="form" class="filter-body" (ngSubmit)="onSearch()">
+    <form [formGroup]="form" class="filter-body" id="filter-body" (ngSubmit)="onSearch()" role="form" aria-label="Formulário de filtros" title="">
       <div class="row align-items-end">
         @for (filter of filters(); track filter.key) {
           @if (filter.type === 'text') {
@@ -123,7 +124,7 @@
       }
 
       <div class="d-flex justify-content-end mt-3">
-        <button mat-raised-button color="primary" type="submit" class="btn-search" [disabled]="hasErrors()">
+        <button mat-raised-button color="primary" type="submit" class="btn-search" [disabled]="hasErrors()" aria-label="Pesquisar registros">
           Pesquisar
         </button>
       </div>

@@ -1,0 +1,72 @@
+<div class="modal-overlay" (click)="onCancel()" (keydown.escape)="onCancel()">
+  <div class="modal-container" [class.modal-readonly]="isViewMode" (click)="$event.stopPropagation()"
+    role="dialog" [attr.aria-modal]="true" [attr.aria-labelledby]="'modal-title'" tabindex="-1" #modalContainer>
+    <div class="modal-header">
+      <h2 class="modal-title" id="modal-title">{{ title }}</h2>
+      <button class="modal-close" (click)="onCancel()" aria-label="Fechar modal">
+        <mat-icon aria-hidden="true">close</mat-icon>
+      </button>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="modal-body">
+      <div class="row">
+        <div class="col-12 col-md-6 mb-3">
+          <label class="field-label" for="dataEntrada">Data Entrada</label>
+          <div class="input-group input-group-sm input-group-borderless">
+            <input class="form-control" id="dataEntrada" formControlName="dataEntrada"
+              bsDatepicker [bsConfig]="dpConfig"
+              placeholder="dd/mm/aaaa"
+              [readonly]="isViewMode" />
+            @if (!isViewMode) {
+              <span class="input-group-text cursor-pointer" aria-label="Abrir calendário">
+                <mat-icon class="datepicker-icon" aria-hidden="true">calendar_today</mat-icon>
+              </span>
+            }
+          </div>
+        </div>
+
+        <div class="col-12 col-md-6 mb-3">
+          <label class="field-label" for="valor">Valor</label>
+          <input type="text" class="form-control form-control-sm" id="valor" formControlName="valor"
+            [class.field-readonly]="isViewMode"
+            appCurrencyMask placeholder="R$ 0,00" [readonly]="isViewMode" />
+        </div>
+
+        <div class="col-12 col-md-6 mb-3">
+          <label class="field-label" for="quantLancamentos">Quant. Lançamentos</label>
+          <input type="number" class="form-control form-control-sm" id="quantLancamentos" formControlName="quantLancamentos"
+            [class.field-readonly]="isViewMode"
+            placeholder="0" [readonly]="isViewMode" />
+        </div>
+
+        <div class="col-12 col-md-6 mb-3">
+          <label class="field-label" for="usuarioRegistro">Usuário Registro</label>
+          <input type="text" class="form-control form-control-sm" id="usuarioRegistro" formControlName="usuarioRegistro"
+            [class.field-readonly]="isViewMode"
+            placeholder="Usuário" [readonly]="isViewMode" />
+        </div>
+
+        @if (showReadonlyFields && editData()) {
+          <div class="col-12 col-md-6 mb-3">
+            <label class="field-label" for="usuarioAprovacao">Usuário Aprovação</label>
+            <input type="text" class="form-control form-control-sm field-readonly" id="usuarioAprovacao" readonly [value]="editData()!['usuarioAprovacao'] || ''" />
+          </div>
+
+          <div class="col-12 col-md-6 mb-3">
+            <label class="field-label" for="situacaoLote">Situação Lote</label>
+            <input type="text" class="form-control form-control-sm field-readonly" id="situacaoLote" readonly [value]="editData()!['situacaoLote'] || ''" />
+          </div>
+        }
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary btn-sm" (click)="onCancel()">
+          {{ isViewMode ? 'Fechar' : 'Cancelar' }}
+        </button>
+        @if (!isViewMode) {
+          <button type="submit" class="btn btn-primary btn-sm btn-submit">Salvar</button>
+        }
+      </div>
+    </form>
+  </div>
+</div>

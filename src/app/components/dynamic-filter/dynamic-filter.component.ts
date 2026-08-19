@@ -1,5 +1,7 @@
-import { Component, input, output, signal, ChangeDetectionStrategy, OnInit, inject } from '@angular/core';
+import { Component, input, output, signal, ChangeDetectionStrategy, OnInit, inject, DestroyRef } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { debounceTime } from 'rxjs';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { BsDatepickerModule, BsLocaleService } from 'ngx-bootstrap/datepicker';
@@ -20,8 +22,8 @@ interface RangeError {
     BsDatepickerModule,
     CurrencyMaskDirective,
   ],
-  templateUrl: './dynamic-filter.html',
-  styleUrl: './dynamic-filter.scss',
+  templateUrl: './dynamic-filter.component.html',
+  styleUrl: './dynamic-filter.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DynamicFilter implements OnInit {
@@ -43,6 +45,9 @@ export class DynamicFilter implements OnInit {
   /** Evento emitido ao clicar em Pesquisar */
   search = output<FilterValues>();
 
+  /** Tempo de debounce para validação em ms */
+  debounceMs = input<number>(300);
+
   form!: FormGroup;
   isExpanded = true;
   rangeErrors = signal<RangeError[]>([]);
@@ -50,6 +55,7 @@ export class DynamicFilter implements OnInit {
 
   private fb = inject(FormBuilder);
   private localeService = inject(BsLocaleService);
+  private destroyRef = inject(DestroyRef);
 
   /** Configuração do bsDatepicker para formato dia */
   dpDayConfig = { dateInputFormat: 'DD/MM/YYYY', containerClass: 'theme-green', showWeekNumbers: false };
@@ -63,8 +69,11 @@ export class DynamicFilter implements OnInit {
     this.isExpanded = this.expanded();
     this.buildForm();
 
-    // Valida ranges a cada mudança no form
-    this.form.valueChanges.subscribe(() => this.validateRanges());
+    // Valida ranges com debounce para evitar excesso de processamento
+    this.form.valueChanges.pipe(
+      debounceTime(this.debounceMs()),
+      takeUntilDestroyed(this.destroyRef)
+    ).subscribe(() => this.validateRanges());
   }
 
   toggleExpanded(): void {

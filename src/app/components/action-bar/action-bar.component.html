@@ -1,13 +1,14 @@
-<div class="action-bar">
+<div class="action-bar" role="toolbar" aria-label="Ações do lote">
   @for (action of actions(); track action.key) {
     <button
       class="action-btn"
       [class.action-btn-filled]="action.style === 'filled'"
       [class.action-btn-outlined]="action.style !== 'filled'"
       [disabled]="action.disabled || false"
+      [attr.aria-label]="action.label"
       (click)="onAction(action.key)">
       @if (action.icon) {
-        <mat-icon class="action-icon">{{ action.icon }}</mat-icon>
+        <mat-icon class="action-icon" aria-hidden="true">{{ action.icon }}</mat-icon>
       }
       <span>{{ action.label }}</span>
     </button>

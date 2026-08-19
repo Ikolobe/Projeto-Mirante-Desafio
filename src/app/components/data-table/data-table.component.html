@@ -1,0 +1,82 @@
+<div class="table-container" role="region" aria-label="Tabela de resultados">
+  <table [class]="'table table-hover table-sm ' + (config().tableClass || '')" role="grid" aria-label="Dados">
+    <thead>
+      <tr>
+        @if (config().selectable) {
+          <th class="col-checkbox" scope="col">
+            <input type="checkbox" [checked]="allSelected()" (change)="toggleAll()"
+              aria-label="Selecionar todos os registros" />
+          </th>
+        }
+        @for (col of config().columns; track col.key) {
+          <th [class]="col.headerClass || ''" [style.text-align]="col.align || 'left'"
+            (click)="toggleSort(col)" (keydown.enter)="toggleSort(col)" (keydown.space)="toggleSort(col)"
+            class="sortable-th" scope="col" tabindex="0" role="columnheader"
+            [attr.aria-sort]="sortColumn() === col.key ? (sortDirection() === 'asc' ? 'ascending' : 'descending') : 'none'"
+            [attr.aria-label]="'Ordenar por ' + col.label">
+            <span class="th-content">
+              {{ col.label }}
+              <mat-icon class="sort-icon" [class.active-sort]="sortColumn() === col.key" aria-hidden="true">{{ getSortIcon(col) }}</mat-icon>
+            </span>
+          </th>
+        }
+      </tr>
+    </thead>
+    <tbody>
+      @for (row of paginatedData(); track $index) {
+        <tr [class.selected]="isSelected($index)" [attr.aria-selected]="isSelected($index)">
+          @if (config().selectable) {
+            <td class="col-checkbox">
+              <input type="checkbox" [checked]="isSelected($index)" (change)="toggleRow($index)"
+                [attr.aria-label]="'Selecionar registro ' + ($index + 1)" />
+            </td>
+          }
+          @for (col of config().columns; track col.key) {
+            <td [class]="col.class || ''" [style.text-align]="col.align || 'left'">
+              @if (col.type === 'date') {
+                {{ $any(getCellValue(row, col)) | date:'dd/MM/yyyy' }}
+              } @else if (col.type === 'currency') {
+                {{ $any(getCellValue(row, col)) | currency:'BRL':'symbol':'1.2-2' }}
+              } @else if (col.type === 'number') {
+                {{ $any(getCellValue(row, col)) | number:'1.0-2' }}
+              } @else {
+                {{ getCellValue(row, col) }}
+              }
+            </td>
+          }
+        </tr>
+      }
+      @if (paginatedData().length === 0) {
+        <tr>
+          <td [attr.colspan]="config().columns.length + (config().selectable ? 1 : 0)" class="text-center text-muted py-4" role="status">
+            Nenhum registro encontrado.
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+
+  @if (config().pagination?.enabled && totalPages() > 1) {
+    <nav class="pagination-container" aria-label="Paginação da tabela">
+      <ul class="pagination pagination-sm">
+        <li class="page-item" [class.disabled]="currentPage() === 1">
+          <a class="page-link" (click)="goToPage(1)" role="button" aria-label="Primeira página" [attr.aria-disabled]="currentPage() === 1">«</a>
+        </li>
+        <li class="page-item" [class.disabled]="currentPage() === 1">
+          <a class="page-link" (click)="goToPage(currentPage() - 1)" role="button" aria-label="Página anterior" [attr.aria-disabled]="currentPage() === 1">‹</a>
+        </li>
+        @for (page of pages(); track page) {
+          <li class="page-item" [class.active]="page === currentPage()">
+            <a class="page-link" (click)="goToPage(page)" role="button" [attr.aria-label]="'Página ' + page" [attr.aria-current]="page === currentPage() ? 'page' : null">{{ page }}</a>
+          </li>
+        }
+        <li class="page-item" [class.disabled]="currentPage() === totalPages()">
+          <a class="page-link" (click)="goToPage(currentPage() + 1)" role="button" aria-label="Próxima página" [attr.aria-disabled]="currentPage() === totalPages()">›</a>
+        </li>
+        <li class="page-item" [class.disabled]="currentPage() === totalPages()">
+          <a class="page-link" (click)="goToPage(totalPages())" role="button" aria-label="Última página" [attr.aria-disabled]="currentPage() === totalPages()">»</a>
+        </li>
+      </ul>
+    </nav>
+  }
+</div>

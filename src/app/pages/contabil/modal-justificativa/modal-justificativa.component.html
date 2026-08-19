@@ -1,0 +1,32 @@
+<div class="modal-overlay" (click)="onCancel()" (keydown.escape)="onCancel()">
+  <div class="modal-container" (click)="$event.stopPropagation()"
+    role="dialog" aria-modal="true" aria-labelledby="justificativa-title" tabindex="-1" #modalContainer>
+    <div class="modal-header">
+      <h2 class="modal-title" id="justificativa-title">{{ title() }}</h2>
+      <button class="modal-close" (click)="onCancel()" aria-label="Fechar modal">
+        <mat-icon aria-hidden="true">close</mat-icon>
+      </button>
+    </div>
+
+    <div class="modal-body">
+      <label class="field-label" for="justificativa-input">Justificativa</label>
+      @if (readonly()) {
+        <textarea class="form-control" id="justificativa-input" rows="5" readonly [value]="justificativa()" aria-label="Justificativa do lote"></textarea>
+      } @else {
+        <textarea class="form-control" id="justificativa-input" rows="5" placeholder="Digite a justificativa..."
+          [ngModel]="justificativa()" (ngModelChange)="justificativa.set($event)" aria-label="Digite a justificativa"></textarea>
+      }
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-secondary btn-sm" (click)="onCancel()">
+        {{ readonly() ? 'Fechar' : 'Cancelar' }}
+      </button>
+      @if (!readonly()) {
+        <button type="button" class="btn btn-primary btn-sm btn-submit" (click)="onConfirm()" [disabled]="!justificativa().trim()">
+          Confirmar
+        </button>
+      }
+    </div>
+  </div>
+</div>

@@ -11,8 +11,8 @@ interface BreadcrumbItem {
 @Component({
   selector: 'app-breadcrumb',
   imports: [RouterLink],
-  templateUrl: './breadcrumb.html',
-  styleUrl: './breadcrumb.scss',
+  templateUrl: './breadcrumb.component.html',
+  styleUrl: './breadcrumb.component.scss',
 })
 export class Breadcrumb {
   private router = inject(Router);

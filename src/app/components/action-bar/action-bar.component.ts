@@ -5,8 +5,8 @@ import { ActionConfig } from './action-bar.model';
 @Component({
   selector: 'app-action-bar',
   imports: [MatIconModule],
-  templateUrl: './action-bar.html',
-  styleUrl: './action-bar.scss',
+  templateUrl: './action-bar.component.html',
+  styleUrl: './action-bar.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ActionBar {

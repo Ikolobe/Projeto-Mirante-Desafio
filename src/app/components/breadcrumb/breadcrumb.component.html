@@ -1,0 +1,14 @@
+<div class="breadcrumb-container">
+  <h1 class="breadcrumb-title">{{ breadcrumbs()[breadcrumbs().length - 1]?.label }}</h1>
+  <nav class="breadcrumb-nav" aria-label="Navegação estrutural">
+    <a class="breadcrumb-link" routerLink="/" aria-label="Ir para Início">Início</a>
+    @for (item of breadcrumbs(); track item.url; let last = $last) {
+      <span class="breadcrumb-separator" aria-hidden="true">›</span>
+      @if (last) {
+        <span class="breadcrumb-link current" aria-current="page">{{ item.label }}</span>
+      } @else {
+        <a class="breadcrumb-link" [routerLink]="item.url" [attr.aria-label]="'Ir para ' + item.label">{{ item.label }}</a>
+      }
+    }
+  </nav>
+</div>
