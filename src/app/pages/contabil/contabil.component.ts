@@ -218,6 +218,8 @@ export class ContabilComponent {
       this.service.atualizarSituacao(ids, situacao, text)
         .pipe(takeUntilDestroyed(this.destroyRef))
         .subscribe(() => {
+          this.selectedRows = [];
+          this.resetActions();
           this.utils.showSuccess('Sucesso', `Lote(s) ${situacao.toLowerCase()}(s) com sucesso!`);
         });
     }
@@ -252,7 +254,17 @@ export class ContabilComponent {
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(() => {
         this.selectedRows = [];
+        this.resetActions();
         this.utils.showSuccess('Sucesso', 'Lote(s) excluído(s) com sucesso!');
       });
+  }
+
+  private resetActions(): void {
+    this.actions.update((actions) =>
+      actions.map((action) => {
+        if (action.key === 'incluir') return action;
+        return { ...action, disabled: true };
+      })
+    );
   }
 }

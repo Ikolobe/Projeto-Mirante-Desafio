@@ -67,7 +67,7 @@
           {{ isViewMode ? 'Fechar' : 'Cancelar' }}
         </button>
         @if (!isViewMode) {
-          <button type="submit" class="btn btn-primary btn-sm btn-submit">Salvar</button>
+          <button type="submit" class="btn btn-primary btn-sm btn-submit" [disabled]="form.invalid">Salvar</button>
         }
       </div>
     </form>
